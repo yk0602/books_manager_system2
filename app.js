@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var sysadmin = require('./routes/sysadmin');
 
 var app = express();
 //enviroment setting. production or development
@@ -23,13 +24,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
+app.use('/sysadmin', session({
+  name: 'sysadmin',
   secret: '123',
-  cookie: {maxAge: 6000},
-  resave:  false,
-  saveUninitialized: true
+  cookie: {maxAge: 60000},
+  resave:  true,
+  saveUninitialized: false
 }));
 app.use('/', routes);
+app.use('/sysadmin', sysadmin);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
