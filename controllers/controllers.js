@@ -1,3 +1,12 @@
+function checkAuthority(req, res, next) {
+	if(req.session && req.session.isSysadmin === true) {
+		return next();
+	} else {
+		res.redirect('login');
+	}
+}
+
+
 module.exports = {
 	mainPage: function(req, res) {
 		res.render('index', { title: 'Express' });

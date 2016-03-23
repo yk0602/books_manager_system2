@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var MongoStore =require('connect-mongo')(session);
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var sysadmin = require('./routes/sysadmin');
@@ -29,7 +30,8 @@ app.use('/sysadmin', session({
   secret: '123',
   cookie: {maxAge: 60000},
   resave:  true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({url: 'mongodb://localhost:27017/bms'})
 }));
 app.use('/', routes);
 app.use('/sysadmin', sysadmin);
