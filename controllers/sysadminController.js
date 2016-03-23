@@ -1,22 +1,29 @@
-var sysadmin =
+function isSysadmin(req) {
+    return req.session.isSysadmin && req.session.isSysadmin === true;
+}
 
 
 module.exports = {
     /*系统管理员的工作界面*/
     mainPage: function(req, res, next) {
-        if(req.session.isSysadmin && req.session.isSysadmin === true)
-            res.render('sysadmin/index');
+        if(isSysadmin(req))
+            res.render('sysadmin/index', {userName: 'system'});
         else
             res.redirect('/sysadmin/login');
     },
     /*系统管理员登录页面*/
     getLogin: function(req, res, next) {
-        res.render('sysadmin/login');
+        if(isSysadmin(req))
+            res.redirect('/sysadmin');
+        else
+            res.render('sysadmin/login');
     },
     /*处理系统管理员的登录操作*/
     postLogin: function(req, res, next) {
         if(req.body.userName === 'system' && req.body.passwd === 'system') {
             req.session.isSysadmin = true;
+            if(!req.body.isRemember)
+                req.session.cookie.expires = false;
             res.redirect('/sysadmin');
         } else {
             res.redirect('/sysadmin/login');

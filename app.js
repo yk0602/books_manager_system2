@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/sysadmin', session({
   name: 'sysadmin',
   secret: '123',
-  cookie: {maxAge: 60000},
+  cookie: {maxAge: require('./config').sysadminMaxAge},//会话时长为 7 天
   resave:  false,
   saveUninitialized: false,
   rolling: false,
