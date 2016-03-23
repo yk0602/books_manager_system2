@@ -1,4 +1,15 @@
 extends ../layout
 
 block content
-    h1 sysadmin login page
+    form.form-hrizontal(method="post" action="/sysadmin/login")
+        .form-group
+            label.col-sm-2.contro-label(for="inputUserName") 用户名
+            .col-sm-10
+                input#inputUserName.form-control(type="text" placeholder="输入用户名" name="userName")
+        .form-group
+            label.col-sm-2.control-label(for="inputPassword3") 密码
+            .col-sm-10
+                input#inputPassword3.form-control(type="password" placeholder="输入密码" name="passwd")
+        .form-group
+            .col-sm-offset-2.col-sm-10
+                button.btn.btn-default(type="submit") 登录

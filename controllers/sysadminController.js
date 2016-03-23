@@ -1,18 +1,26 @@
+var sysadmin =
+
+
 module.exports = {
     /*系统管理员的工作界面*/
     mainPage: function(req, res, next) {
-        res.render('sysadmin/index');
+        if(req.session.isSysadmin && req.session.isSysadmin === true)
+            res.render('sysadmin/index');
+        else
+            res.redirect('/sysadmin/login');
     },
     /*系统管理员登录页面*/
     getLogin: function(req, res, next) {
-        req.session.username = 'admin';
-        req.session.password = 'admin';
-        console.log(req.sessionID);
         res.render('sysadmin/login');
     },
     /*处理系统管理员的登录操作*/
     postLogin: function(req, res, next) {
-
+        if(req.body.userName === 'system' && req.body.passwd === 'system') {
+            req.session.isSysadmin = true;
+            res.redirect('/sysadmin');
+        } else {
+            res.redirect('/sysadmin/login');
+        }
     },
     /*添加图书管理员*/
     addBookAdmin: function(req, res, next) {

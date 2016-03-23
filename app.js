@@ -29,8 +29,9 @@ app.use('/sysadmin', session({
   name: 'sysadmin',
   secret: '123',
   cookie: {maxAge: 60000},
-  resave:  true,
+  resave:  false,
   saveUninitialized: false,
+  rolling: false,
   store: new MongoStore({url: 'mongodb://localhost:27017/bms'})
 }));
 app.use('/', routes);

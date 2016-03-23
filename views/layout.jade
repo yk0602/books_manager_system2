@@ -5,10 +5,10 @@ html
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initital-scale=1")
     title= Title
-    link(href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet")
-    link(href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
-    script(src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js")
-    script(src="htttp://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js")
+    link(href="/stylesheets/thirdpart/bootstrap.min.css" rel="stylesheet")
+    link(href="/stylesheets/thirdpart/bootstrap-theme.min.css" rel="stylesheet")
+    script(src="/javascripts/thirdpart/jquery-1.12.2.min.js")
+    script(src="/javascripts/thirdpart/bootstrap.min.js")
   body
     nav.navbar.navbar-default
       .container-fluid
@@ -50,14 +50,9 @@ html
             button.btn.btn-default(type='submit') Submit
           ul.nav.navbar-nav.navbar-right
             li
-              button.btn.btn-default.navbar-btn(data-toggle="modal" data-target="#loginModal") Sign in
-              #loginModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="myModalLabel")
-                .modol-dialog(role="document")
-                  .modal-content
-                    .modal-header
-                      h4#myModalLabel.modal-title Test
+              button.btn.btn-default.navbar-btn(data-toggle="modal" data-target="#loginModal") 登录
             li
-              button.btn.btn-default.navbar-btn Sign out
+              button.btn.btn-default.navbar-btn 注销
 
 
     block content
