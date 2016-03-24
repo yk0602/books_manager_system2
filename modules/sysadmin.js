@@ -1,4 +1,4 @@
-var db = require('../bin/www');
+var db = require('./mongoDB');
 
 function SysAdmin(userName, passwd) {
     this.userName = userName;
@@ -6,9 +6,8 @@ function SysAdmin(userName, passwd) {
 }
 
 SysAdmin.prototype.getAllBookAdmin = function() {
-    console.log(db);
     return db.collection('bookadmins').find().toArray();
-};
+}
 
 SysAdmin.prototype.getBookAdminById = function(id) {
 
