@@ -10,7 +10,7 @@ var sysadmin = require('./routes/sysadmin');
 var app = express();
 var session = require('express-session');
 var MongoStore =require('connect-mongo')(session);
-var db = require('./modules/mongoDB');
+var db = require('./modules/mongo');
 //enviroment setting. production or development
 app.set('env', 'development');
 

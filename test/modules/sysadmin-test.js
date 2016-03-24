@@ -4,7 +4,11 @@ describe('sysadmin.js', function() {
     var sysadmin = new SysAdmin();
     describe('#getAllBookAdmin()', function() {
         it('return null', function() {
-            return sysadmin.getAllBookAdmin().should.be.a.Promise();
+            sysadmin.getAllBookAdmin()
+                .then(function(docs) {
+                    console.log(docs)
+                })
+            // return sysadmin.getAllBookAdmin().should.be.a.Promise();
         });
     });
 });
