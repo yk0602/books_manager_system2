@@ -1,5 +1,7 @@
+var sysadmin = require('../config').sysadmin;
+
 function isSysadmin(req) {
-    return req.session.isSysadmin && req.session.isSysadmin === true;
+    return req.session && req.session.isSysadmin === true;
 }
 
 
@@ -20,7 +22,7 @@ module.exports = {
     },
     /*处理系统管理员的登录操作*/
     postLogin: function(req, res, next) {
-        if(req.body.userName === 'system' && req.body.passwd === 'system') {
+        if(req.body.userName === sysadmin.userName && req.body.passwd === sysadmin.passwd) {
             req.session.isSysadmin = true;
             if(!req.body.isRemember)
                 req.session.cookie.expires = false;
@@ -30,11 +32,11 @@ module.exports = {
         }
     },
     /*添加图书管理员*/
-    addBookAdmin: function(req, res, next) {
+    PostAddBookAdmin: function(req, res, next) {
 
     },
     /*删除图书管理员*/
-    removeBookAdmin: function(req, res, next) {
+    PostRemoveBookAdmin: function(req, res, next) {
 
     },
     /*添加图书*/

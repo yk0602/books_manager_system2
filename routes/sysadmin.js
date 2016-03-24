@@ -7,9 +7,9 @@ router.all('/', sysadminController.mainPage);
 router.get('/login', sysadminController.getLogin);
 router.post('/login', sysadminController.postLogin);
 /*添加图书管理员*/
-router.post('/addbookadmin', sysadminController.addBookAdmin);
+router.post('/addbookadmin', sysadminController.PostAddBookAdmin);
 /*删除图书管理员*/
-router.post('/removebookadmin', sysadminController.removeBookAdmin);
+router.post('/removebookadmin', sysadminController.PostRemoveBookAdmin);
 /*图书入库*/
 router.post('/addbook', sysadminController.addBook);
 /*图书出库*/

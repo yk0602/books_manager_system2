@@ -4,13 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
-var MongoStore =require('connect-mongo')(session);
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var sysadmin = require('./routes/sysadmin');
-
 var app = express();
+var session = require('express-session');
+var MongoStore =require('connect-mongo')(session);
+var db = require('./bin/www');
 //enviroment setting. production or development
 app.set('env', 'development');
 
@@ -24,20 +24,19 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/sysadmin', session({
-  name: 'sysadmin',
+app.use('/', session({
+  name: 'bmsUser',
   secret: '123',
-  cookie: {maxAge: require('./config').sysadminMaxAge},//会话时长为 7 天
+  cookie: {maxAge: require('./config').sysadminMaxAge},
   resave:  false,
   saveUninitialized: false,
   rolling: false,
-  store: new MongoStore({url: 'mongodb://localhost:27017/bms'})
+  store: new MongoStore({db: db})
 }));
-app.use('/', routes);
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/sysadmin', sysadmin);
 app.use('/users', users);
-
+app.use('/', routes);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
